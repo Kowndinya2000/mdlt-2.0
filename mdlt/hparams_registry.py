@@ -28,7 +28,13 @@ def _hparams(algorithm, dataset, random_seed):
 
     _hparam('data_augmentation', True, lambda r: True)
     _hparam('resnet18', False, lambda r: False)
+    ## @Kowndinya - Making changes 
+    _hparam('resnet101', False, lambda r: False)
+    _hparam('resnet152', True, lambda r: True)
+    _hparam('resnet152_dropout', 0.5, lambda r: r.choice([0., 0.1, 0.5]))
+    ## @Kowndinya - End of making changes
     _hparam('resnet_dropout', 0., lambda r: r.choice([0., 0.1, 0.5]))
+
     # nonlinear classifiers disabled
     _hparam('nonlinear_classifier', False, lambda r: bool(r.choice([False, False])))
 
@@ -133,7 +139,7 @@ def _hparams(algorithm, dataset, random_seed):
     elif 'DANN' in algorithm:
         _hparam('weight_decay_g', 0., lambda r: 10**r.uniform(-6, -2))
 
-    if 'CRT' in algorithm:
+    if 'CRT' in algorithm: # @Kowndinya - Making Changes
         _hparam('stage1_model', 'model.best.pkl', lambda r: 'model.best.pkl')
 
     # Imbalanced dataset(-and-algorithm)-specific hparam definitions

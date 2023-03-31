@@ -1,0 +1,7 @@
+defaults:
+  - core: mdlt
+  - base: main
+  - __self__
+paths:
+  data_dir: ${hydra.runtime.cwd}/data
+  output_dir: ${hydra.runtime.cwd}/out

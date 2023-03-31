@@ -19,8 +19,11 @@ from mdlt.learning import algorithms
 from mdlt.utils import misc
 from mdlt.dataset.fast_dataloader import InfiniteDataLoader, FastDataLoader
 
+# hydra related
+import hydra 
 
-if __name__ == "__main__":
+# @hydra.main(config_path="../config", config_name="config")
+def main():
     parser = argparse.ArgumentParser(description='Multi-Domain LT')
     # training
     parser.add_argument('--dataset', type=str, default="PACS", choices=datasets.DATASETS)
@@ -41,11 +44,14 @@ if __name__ == "__main__":
     # two-stage related
     parser.add_argument('--stage1_folder', type=str, default='vanilla')
     parser.add_argument('--stage1_algo', type=str, default='ERM')
+    ## @Kowndinya: Added this argument to run stage2
+    parser.add_argument("--stage2", action="store_true", help="Run stage2 (classifier learning)")
     # checkpoints
     parser.add_argument('--resume', '-r', type=str, default='')
     parser.add_argument('--pretrained', type=str, default='')
     parser.add_argument('--checkpoint_freq', type=int, default=None, help='Checkpoint every N steps')
     parser.add_argument('--skip_model_save', action='store_true')
+
     args = parser.parse_args()
 
     start_step = 0
@@ -173,13 +179,16 @@ if __name__ == "__main__":
     algorithm = algorithm_class(input_shape, num_classes, len(train_dataset), hparams, env_labels=train_labels)
 
     # load stage1 model if using 2-stage algorithm
-    if 'CRT' in args.algorithm:
-        args.pretrained = os.path.join(
-            args.output_dir.replace(args.output_folder_name, args.stage1_folder), hparams['stage1_model']
-        ).replace(args.algorithm, args.stage1_algo)
-        args.pretrained = args.pretrained.replace(
-            f"seed{args.pretrained[args.pretrained.find('seed') + len('seed')]}", 'seed0')
-        assert os.path.isfile(args.pretrained)
+    print('args.stage2:', args.stage2)
+    if args.stage2:
+        if 'CRT' in args.algorithm or 'BoDA' in args.algorithm:  # @Kowndinya Making changes'
+            print('hparams:', hparams)
+            args.pretrained = os.path.join(
+                args.output_dir.replace(args.output_folder_name, args.stage1_folder), hparams['stage1_model']
+            ).replace(args.algorithm, args.stage1_algo)
+            args.pretrained = args.pretrained.replace(
+                f"seed{args.pretrained[args.pretrained.find('seed') + len('seed')]}", 'seed0')
+            assert os.path.isfile(args.pretrained)
 
     if args.pretrained:
         checkpoint = torch.load(args.pretrained, map_location="cpu")
@@ -348,3 +357,8 @@ if __name__ == "__main__":
 
     with open(os.path.join(args.output_dir, 'done'), 'w') as f:
         f.write('done')
+    print("Done!")
+
+
+if __name__ == "__main__":
+    main()

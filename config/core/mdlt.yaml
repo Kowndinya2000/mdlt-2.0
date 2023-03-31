@@ -1,0 +1,80 @@
+dataset: 
+  - type: str
+  - default: PACS
+  - choices:
+    - Debug28
+    - Debug224
+    - ImbalancedColoredMNIST
+    - ImbalancedRotatedMNIST
+    - ImbalancedDigits
+    - VLCS
+    - PACS
+    - OfficeHome
+    - TerraIncognita
+    - DomainNet
+algorithm: 
+  - type: str
+  - default: BoDA
+  - choices:
+    - ERM
+    - IRM
+    - GroupDRO
+    - Mixup
+    - MLDG
+    - CORAL
+    - MMD
+    - DANN
+    - CDANN
+    - MTL
+    - SagNet
+    - Fish
+    - ReSamp
+    - ReWeight
+    - SqrtReWeight
+    - CBLoss
+    - Focal
+    - LDAM
+    - BSoftmax
+    - CRT
+    - BoDA
+
+imb_type: 
+  type: str
+  default: eeee
+  help: Length should be equal to number of envs, each refers to imb_type within that env
+imb_factor: 0.1
+seed: 0
+stage1_algo: BoDA
+skip_model_save: false
+stage2:
+  type: bool
+  default: false
+  help: Run stage2 (classifier learning)
+hparams:
+  type: str
+  help: JSON-serialized hparams dict
+hparams_seed:
+  type: int
+  default: 0
+  help: Seed for random hparams (0 for 'default' hparams)
+steps:
+  type: int
+  default: null
+selected_envs:
+  type: int
+  nargs: '+'
+  default: null
+  help: Train only on selected envs
+resume:
+  type: str
+  default: ''
+pretrained:
+  type: str
+  default: ''
+checkpoint_freq:
+  type: int
+  default: null
+  help: Checkpoint every N steps
+skip_model_save:
+  type: bool
+  default: false

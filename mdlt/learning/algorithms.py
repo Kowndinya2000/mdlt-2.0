@@ -339,11 +339,16 @@ class BoDA(ERM):
         if self.steps >= self.boda_start_step:
             pairwise_dist = -1 * self.pairwise_dist(self.train_centroids, torch.cat(features))
             # balanced distance
-            n_per_sample = self.n_samples_table[all_envs.long(), all_y.long()]
+            ## @Kowndinya - Making changes
+            # print('n_samples_table device: ', self.n_samples_table.device)
+            # n_per_sample = self.n_samples_table[all_envs.long(), all_y.long()]
+            n_per_sample = self.n_samples_table[all_envs.long().to(self.n_samples_table.device), all_y.long().to(self.n_samples_table.device)]
             logits = torch.div(pairwise_dist, n_per_sample.to(pairwise_dist.device))
             # calibrated distance
             n_samples_numerator = self.n_samples_table[self.centroid_envs.long(), self.centroid_classes.long()]
-            n_samples_denominator = self.n_samples_table[all_envs.long(), all_y.long()]
+            # n_samples_denominator = self.n_samples_table[all_envs.long(), all_y.long()]
+            n_samples_denominator = self.n_samples_table[all_envs.long().to(self.n_samples_table.device), all_y.long().to(self.n_samples_table.device)]
+            ## @Kowndinya - End of making changes
             size_h, size_w = n_samples_numerator.size(0), n_samples_denominator.size(0)
             cal_weights = (n_samples_numerator.unsqueeze(1).expand(-1, size_w) /
                            n_samples_denominator.unsqueeze(0).expand(size_h, -1)) ** self.nu
@@ -376,6 +381,9 @@ class BoDA(ERM):
         self.optimizer.zero_grad()
         loss = loss_x + self.hparams['macro_weight'] * penalty
         if self.steps >= self.boda_start_step:
+            # @Kowndinya - Checking if: boda_weight_schedule = lambda step: min(1.0, step / self.hparams['boda_weight_rampup_steps'])
+            # loss += boda_weight_schedule(self.steps) * self.hparams['boda_weight'] * loss_b
+            # a weight schedule can better the performance
             loss += self.hparams['boda_weight'] * loss_b
         loss.backward()
         self.optimizer.step()

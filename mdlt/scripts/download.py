@@ -68,7 +68,6 @@ def download_pacs(data_dir):
 
     os.rename(os.path.join(data_dir, "kfold"), full_path)
 
-
 # Office-Home
 
 def download_office_home(data_dir):
@@ -76,7 +75,7 @@ def download_office_home(data_dir):
     full_path = stage_path(data_dir, "office_home")
 
     download_and_extract(
-        "https://drive.google.com/file/d/0B81rNlvomiwed0V1YUxQdC1uOTg/view?resourcekey=0-2SNWq0CDAuWOBRRBL7ZZsw",
+        "https://drive.google.com/u/0/uc?id=0B81rNlvomiwed0V1YUxQdC1uOTg&export=download&resourcekey=0-2SNWq0CDAuWOBRRBL7ZZsw",
         os.path.join(data_dir, "office_home.zip"))
 
     os.rename(os.path.join(data_dir, "OfficeHomeDataset_10072016"), full_path)
@@ -100,7 +99,7 @@ def download_domain_net(data_dir):
     for url in urls:
         download_and_extract(url, os.path.join(full_path, url.split("/")[-1]))
 
-    with open("scripts/misc/domain_net_duplicates.txt", "r") as f:
+    with open("/home/exx/Project/ws_Kowndinya/benchmarking/ext/mdlt-2.0/mdlt/scripts/misc/domain_net_duplicates.txt", "r") as f:
         for line in f.readlines():
             try:
                 os.remove(os.path.join(full_path, line.strip()))
@@ -195,9 +194,9 @@ if __name__ == "__main__":
     parser.add_argument('--data_dir', type=str, required=True)
     args = parser.parse_args()
 
-    download_mnist(args.data_dir)
+    # download_mnist(args.data_dir)
     download_pacs(args.data_dir)
-    download_office_home(args.data_dir)
-    download_domain_net(args.data_dir)
-    download_vlcs(args.data_dir)
-    download_terra_incognita(args.data_dir)
+    # download_office_home(args.data_dir)
+    # download_domain_net(args.data_dir)
+    # download_vlcs(args.data_dir)
+    # download_terra_incognita(args.data_dir)
