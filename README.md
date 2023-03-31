@@ -1,6 +1,6 @@
-# Multi-Domain Long-Tailed Recognition (MDLT)
+# Enhanced Multi-Domain Long-Tailed Recognition (MDLT 2.0)
 
-This repository contains the implementation for paper: [On Multi-Domain Long-Tailed Recognition, Imbalanced Domain Generalization and Beyond](https://arxiv.org/abs/2203.09513) (ECCV 2022).
+This repository contains the **revised** implementation of the paper: [On Multi-Domain Long-Tailed Recognition, Imbalanced Domain Generalization and Beyond](https://arxiv.org/abs/2203.09513) (ECCV 2022).
 
 It is also a (living) PyTorch suite containing benchmark datasets and algorithms for Multi-Domain Long-Tailed Recognition (MDLT). Currently we support [8 MDLT datasets](./mdlt/dataset/datasets.py) (3 synthetic + 5 real), as well as [~20 algorithms](./mdlt/learning/algorithms.py) that span different learning strategies. Feel free to send us a PR to add your algorithm / dataset for MDLT!
 ___
@@ -35,11 +35,19 @@ python -m mdlt.scripts.download --data_dir <data_path>
 ```
 2. Place the `.csv` files of train/val/test splits for each MDLT dataset (provided in `mdlt/dataset/split/`) in the corresponding dataset folder under your `data_path`
 
-#### Dependencies
-1. PyTorch (>=1.4, tested on 1.4 / 1.9)
-2. pandas
-3. TensorboardX
+#### Dependencies (Approach 1)
+Step1: Install CUDA Toolkit 11.8 from [here](https://developer.nvidia.com/cuda-11-8-0-download-archive)
 
+Step2: Run the following commands to install the dependencies 
+````
+conda create -n mdlt python=3.8
+pip install -r requirements.txt
+````
+
+#### OR follow Approach 2
+````
+conda env create -f environment.yaml
+````
 
 ### Code Overview
 
