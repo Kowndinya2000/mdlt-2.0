@@ -490,9 +490,9 @@ class VLCS(MultipleEnvironmentImageFolder):
     MANY_SHOT_THRES = 100
     FEW_SHOT_THRES = 20
 
-    def __init__(self, root, split, hparams):
+    def __init__(self, root, split, hparams,mask_class):
         self.dir = os.path.join(root, "VLCS")
-        self.df = pd.read_csv(os.path.join(self.dir, "VLCS.csv"))
+        self.df = pd.read_csv(os.path.join(self.dir, "VLCS"+'_'+mask_class+".csv"))
         super().__init__(self.dir, self.df, split, hparams['data_augmentation'], hparams)
 
 
@@ -501,9 +501,9 @@ class PACS(MultipleEnvironmentImageFolder):
     MANY_SHOT_THRES = 100
     FEW_SHOT_THRES = 20
 
-    def __init__(self, root, split, hparams):
+    def __init__(self, root, split, hparams,mask_class):
         self.dir = os.path.join(root, "PACS")
-        self.df = pd.read_csv(os.path.join(self.dir, "PACS.csv"))
+        self.df = pd.read_csv(os.path.join(self.dir, "PACS"+'_'+mask_class+".csv"))
         super().__init__(self.dir, self.df, split, hparams['data_augmentation'], hparams)
 
 
@@ -514,9 +514,9 @@ class DomainNet(MultipleEnvironmentImageFolder):
     MANY_SHOT_THRES = 100
     FEW_SHOT_THRES = 20
 
-    def __init__(self, root, split, hparams):
+    def __init__(self, root, split, hparams,mask_class):
         self.dir = os.path.join(root, "domain_net")
-        self.df = pd.read_csv(os.path.join(self.dir, "DomainNet.csv"))
+        self.df = pd.read_csv(os.path.join(self.dir, "DomainNet"+'_'+mask_class+".csv"))
         super().__init__(self.dir, self.df, split, hparams['data_augmentation'], hparams)
 
 
@@ -527,7 +527,7 @@ class OfficeHome(MultipleEnvironmentImageFolder):
 
     def __init__(self, root, split, hparams):
         self.dir = os.path.join(root, "office_home")
-        self.df = pd.read_csv(os.path.join(self.dir, "OfficeHome.csv"))
+        self.df = pd.read_csv(os.path.join(self.dir, "OfficeHome"+'_'+mask_class+".csv"))
         super().__init__(self.dir, self.df, split, hparams['data_augmentation'], hparams)
 
 
@@ -536,7 +536,7 @@ class TerraIncognita(MultipleEnvironmentImageFolder):
     MANY_SHOT_THRES = 100
     FEW_SHOT_THRES = 25
 
-    def __init__(self, root, split, hparams):
+    def __init__(self, root, split, hparams,mask_class):
         self.dir = os.path.join(root, "terra_incognita")
-        self.df = pd.read_csv(os.path.join(self.dir, "TerraIncognita.csv"))
+        self.df = pd.read_csv(os.path.join(self.dir, "TerraIncognita"+'_'+mask_class+".csv"))
         super().__init__(self.dir, self.df, split, hparams['data_augmentation'], hparams)

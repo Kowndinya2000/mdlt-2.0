@@ -21,7 +21,6 @@ from mdlt.dataset.fast_dataloader import InfiniteDataLoader, FastDataLoader
 
 # hydra related
 import hydra 
-
 # @hydra.main(config_path="../config", config_name="config")
 def main():
     parser = argparse.ArgumentParser(description='Multi-Domain LT')
@@ -29,6 +28,7 @@ def main():
     parser.add_argument('--dataset', type=str, default="PACS", choices=datasets.DATASETS)
     parser.add_argument('--algorithm', type=str, default="ERM", choices=algorithms.ALGORITHMS)
     parser.add_argument('--output_folder_name', type=str, default='debug')
+    parser.add_argument('--mask_class', type=str, default=32)  #@changed by satyam
     # imbalance related
     parser.add_argument('--imb_type', type=str, default="eeee",
                         help='Length should be equal to # of envs, each refers to imb_type within that env')
@@ -107,9 +107,9 @@ def main():
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     if args.dataset in vars(datasets):
-        train_dataset = vars(datasets)[args.dataset](args.data_dir, 'train', hparams)
-        val_dataset = vars(datasets)[args.dataset](args.data_dir, 'val', hparams)
-        test_dataset = vars(datasets)[args.dataset](args.data_dir, 'test', hparams)
+        train_dataset = vars(datasets)[args.dataset](args.data_dir, 'train', hparams,args.mask_class)
+        val_dataset = vars(datasets)[args.dataset](args.data_dir, 'val', hparams,args.mask_class)
+        test_dataset = vars(datasets)[args.dataset](args.data_dir, 'test', hparams,args.mask_class)
     else:
         raise NotImplementedError
 

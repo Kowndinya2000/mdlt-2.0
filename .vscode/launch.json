@@ -272,6 +272,98 @@
                 "BoDA"
             ],
             "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "DG officehome_Art - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/DGofficehome_Art-boda",
+             "--dataset",
+                "OfficeHome",
+                "--algorithm",
+                "BoDA",
+                "--mask_class",
+                "Art"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "DG officehome_Clipart - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/DGofficehome_Clipart-boda",
+             "--dataset",
+                "OfficeHome",
+                "--algorithm",
+                "BoDA",
+                "--mask_class",
+                "Clipart"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "DG officehome_Product - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/DGofficehome_Product-boda",
+             "--dataset",
+                "OfficeHome",
+                "--algorithm",
+                "BoDA",
+                "--mask_class",
+                "Product"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "DG officehome_RealWorld - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/DGofficehome_RealWorld-boda",
+             "--dataset",
+                "OfficeHome",
+                "--algorithm",
+                "BoDA",
+                "--mask_class",
+                "RealWorld"
+            ],
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
