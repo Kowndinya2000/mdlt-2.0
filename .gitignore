@@ -129,8 +129,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# datasets
-data/ 
 
 #outputs
 out/
