@@ -4,6 +4,8 @@ import argparse
 import os
 from os.path import join
 import matplotlib.pyplot as plt
+import torch
+import random
 
 
 DATASETS = {
@@ -13,6 +15,7 @@ DATASETS = {
     'TerraIncognita': 'terra_incognita',
     'DomainNet': 'domain_net',
     'SVIRO': 'sviro',
+    'CIFAR10' : 'cifar',
 }
 NUM_SAMPLES_PER_CLASS = {
     # (num_test, num_val) tuple, by default num_val is set to half of num_test
@@ -146,6 +149,31 @@ def get_args():
     args = parser.parse_args()
     return args
 
+def make_imbalance_dataset(dataset, num_classes, num_samples_low_freq, num_samples_high_freq):
+    freq = torch.zeros(num_classes)
+    for i in range(len(dataset)):
+        _, label = dataset[i]
+        freq[label] += 1
+    _, sorted_indices = torch.sort(freq)
+
+    num_samples_per_class = [num_samples_low_freq] * num_classes/2 + [num_samples_high_freq] * num_classes/2
+
+    indices = []
+    for i in range(num_classes):
+        idx = torch.where(dataset.targets == sorted_indices[i])[0]
+        random.shuffle(idx)
+        idx = idx[:num_samples_per_class[i]]
+        indices.append(idx)
+    for i in range(num_classes/2, num_classes):
+        idx = torch.where(dataset.targets == sorted_indices[i])[0]
+        random.shuffle(idx)
+        idx = idx[:num_samples_high_freq]
+        indices.append(idx)
+    indices = torch.cat(indices)
+
+    imbalanced_dataset = torch.utils.data.Subset(dataset, indices)
+
+    return imbalanced_dataset
 
 if __name__ == '__main__':
     args = get_args()
