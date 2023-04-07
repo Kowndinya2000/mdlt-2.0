@@ -1,0 +1,9 @@
+gdown
+torch
+tensorboard
+tensorboardx
+torchvision
+pandas
+pillow
+scikit-learn
+tensorboard_logger

@@ -1,0 +1,96 @@
+
+Ubuntu 20.04.5 LTS5.4.0-136-generic
+----------------------------------------------------------------------------
+Machine Name:  	ilab4.cs          IP No:      128.6.4.28 2620:0:d60:ac04::1c
+Thu 06 Apr 2023 09:27:31 PM EDT	  Uptime:        	       90 days 02:04
+----------------------------------------------------------------------------
+Processes:     	1634              Local/SSH/X2Go/XRDP/VSCODE:	0/4/1/4/1           
+HostProxy:     	3                 TMUX/SCREEN/JUPYTER:	12/2/4
+Connections:   	152               Load/Total Users:	1/31
+Free Memory:   	58Gi of 503Gi     Free Swap:     	511Gi of 511Gi
+----------------------------------------------------------------------------
+CPU Info:      	AMD EPYC 7352 24-Core Processor - 96 cores 
+System CPU:    	0.77%             User CPU:      	0.75%
+CPU Idle:      	98.48%            IO Wait:       	0.00%
+----------------------------------------------------------------------------
+Login as:      	at1341            No. of Sessions:	0
+Avail.UserDisk:	                  Avail.Freespace:	3452.63 GB
+CUDA Driver:   	11.3              CUDA Cores:    	12288
+----------------------------------------------------------------------------
+
+Environment:
+	Python: 3.8.16
+	PyTorch: 2.0.0+cu117
+	Torchvision: 0.15.1+cu117
+	CUDA: 11.7
+	CUDNN: 8500
+	NumPy: 1.24.2
+	PIL: 9.5.0
+Args:
+	algorithm: BoDA
+	best_val_acc: 0
+	checkpoint_freq: None
+	data_dir: DATASETS
+	dataset: PACS
+	hparams: None
+	hparams_seed: 0
+	imb_factor: 0.1
+	imb_type: eeee
+	output_dir: miro_swadregnet_pacs_boda/out/PACS_BoDA_hparams0_seed0
+	output_folder_name: out
+	pretrained: 
+	resume: 
+	seed: 0
+	selected_envs: None
+	skip_model_save: False
+	stage1_algo: ERM
+	stage1_folder: vanilla
+	stage2: False
+	steps: None
+	store_name: PACS_BoDA_hparams0_seed0
+	use_miro: True
+HParams:
+	batch_size: 24
+	boda_start_step: 500
+	boda_weight: 0.1
+	class_balanced: False
+	data_augmentation: True
+	feat_update_freq: 120
+	lr: 5e-05
+	macro_weight: 1.0
+	momentum: 0.2
+	nonlinear_classifier: False
+	nu: 0.5
+	resnet101: False
+	resnet152: True
+	resnet152_dropout: 0.5
+	resnet18: False
+	resnet_dropout: 0.0
+	temperature: 1.0
+	weight_decay: 0.0
+Dataset:
+	env0:	1523	|	175	|	350
+	env1:	1819	|	175	|	350
+	env2:	1145	|	175	|	350
+	env3:	3404	|	175	|	350
+<class 'mdlt.models.networks.Featurizer.<locals>.ModelConfig'>
+swag_regnety_16gf
+Using cache found in /common/home/at1341/.cache/torch/hub/facebookresearch_swag_main
+args.stage2: False
+
+
+step      epoch     loss      penalty   env0_tes  env0_val  env1_tes  env1_val  env2_tes  env2_val  env3_tes  env3_val  sht_many  sht_medi  sht_few   sht_zero 
+0         0.0000    2.8530    2.8490    0.1257    0.1029    0.1257    0.1086    0.1086    0.1257    0.1114    0.1371    0.1256    0.0200    0.1200    -1.0000  
+100       2.0961    1.3063    2.7940    0.8400    0.8514    0.8143    0.7600    0.9629    0.9600    0.7029    0.6857    0.8776    0.5400    0.2200    -1.0000  
+200       4.1921    0.3786    2.8235    0.9371    0.9429    0.9571    0.9371    0.9971    0.9886    0.8914    0.8571    0.9608    0.9100    0.6400    -1.0000  
+300       6.2882    0.2178    2.8102    0.9571    0.9657    0.9771    0.9600    1.0000    1.0000    0.9257    0.9086    0.9736    0.9700    0.7400    -1.0000  
+400       8.3843    0.1510    2.7853    0.9714    0.9771    0.9829    0.9771    1.0000    1.0000    0.9429    0.9086    0.9800    0.9900    0.8000    -1.0000  
+
+
+step      epoch     loss      penalty   boda_los  env0_tes  env0_val  env1_tes  env1_val  env2_tes  env2_val  env3_tes  env3_val  sht_many  sht_medi  sht_few   sht_zero 
+500       10.4803   0.1190    2.7883    3.3144    0.9714    0.9771    0.9857    0.9829    1.0000    1.0000    0.9543    0.9143    0.9816    0.9900    0.8600    -1.0000  
+
+
+step      epoch     loss      boda_los  penalty   env0_tes  env0_val  env1_tes  env1_val  env2_tes  env2_val  env3_tes  env3_val  sht_many  sht_medi  sht_few   sht_zero 
+600       12.5764   0.0996    3.3365    2.7733    0.9743    0.9714    0.9886    0.9886    1.0000    1.0000    0.9600    0.9257    0.9832    1.0000    0.8800    -1.0000  
+700       14.6725   0.0866    3.3732    2.8182    0.9771    0.9771    0.9857    0.9943    1.0000    1.0000    0.9657    0.9200    0.9840    1.0000    0.9000    -1.0000  

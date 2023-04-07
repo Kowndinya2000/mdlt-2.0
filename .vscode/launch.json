@@ -1,0 +1,277 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "download datasets",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.scripts.download",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data"
+            ]
+        }, 
+        {
+            "name": "pacs - erm",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/DATASETS",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/pacs-erm",
+             "--dataset",
+                "PACS",
+                "--algorithm",
+                "ERM"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "pacs - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/pacs-boda",
+             "--dataset",
+                "PACS",
+             "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "pacs - boda - resnet152",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/resnet152pacs-boda",
+             "--dataset",
+                "PACS",
+             "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "stage2- pacs - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/stage2-pacs-boda",
+             "--dataset",
+                "PACS",
+             "--algorithm",
+                "BoDA",
+                "--stage1_folder",
+                "${workspaceFolder}/out/pacs-boda",
+                 "--stage1_algo",
+                 "BoDA",
+                 "--stage2"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "vlcs - erm",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/vlcs-erm",
+             "--dataset",
+                "PACS",
+                "--algorithm",
+                "ERM"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "vlcs - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/vlcs-boda",
+             "--dataset",
+                "VLCS",
+             "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "officehome - erm",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/officehome-erm",
+             "--dataset",
+                "OfficeHome",
+                "--algorithm",
+                "ERM"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "officehome - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/officehome-boda",
+             "--dataset",
+                "OfficeHome",
+             "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "terraincognita - erm",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/terraincognita-erm",
+             "--dataset",
+                "TerraIncognita",
+                "--algorithm",
+                "ERM"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "terraincognita - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/terraincognita-boda",
+             "--dataset",
+                "TerraIncognita",
+             "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "domainnet - erm",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/domainnet-erm",
+             "--dataset",
+                "DomainNet",
+                "--algorithm",
+                "ERM"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "domainnet - boda",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/domainnet-boda",
+             "--dataset",
+                "DomainNet",
+             "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+#!/bin/bash -l
+#SBATCH --output=logile
+
+cd /common/home/at1341/Desktop/MDLT 
+activate mdlt
+python -m mdlt.train --use_miro --algorithm BoDA --dataset PACS --output_folder_name out --data_dir DATASETS --output_dir out/miro_swadregnet_pacs_boda

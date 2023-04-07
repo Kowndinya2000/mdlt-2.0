@@ -1,0 +1,11 @@
+datasets:
+  - Debug28
+  - Debug224
+  - ImbalancedColoredMNIST
+  - ImbalancedRotatedMNIST
+  - ImbalancedDigits
+  - VLCS
+  - PACS
+  - OfficeHome
+  - TerraIncognita
+  - DomainNet
