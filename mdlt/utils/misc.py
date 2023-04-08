@@ -157,7 +157,7 @@ def accuracy(network, loader, weights, train_labels, many_shot_thr, few_shot_thr
         for x, y in loader:
             x = x.to(device)
             y = y.to(device)
-            p = network.predict(x)
+            p = network.module.predict(x)
             all_p.extend(p.argmax(1).cpu().numpy())
             all_t.extend(y.cpu().numpy())
             if weights is None:

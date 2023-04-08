@@ -32,6 +32,16 @@ def _hparams(algorithm, dataset, random_seed):
     _hparam('resnet101', False, lambda r: False)
     _hparam('resnet152', True, lambda r: True)
     _hparam('resnet152_dropout', 0.5, lambda r: r.choice([0., 0.1, 0.5]))
+
+    # MIRO Related
+    _hparam('feat_layers', [1, 2], lambda r: [1, 2])
+    _hparam('ld', 0.1, lambda r: 10**r.uniform(-2, 0))
+    _hparam('lr_mult', 1, lambda r: r.choice([0.1, 1, 10]))
+    _hparam('use_miro', False, lambda r: False)
+    _hparam("num_classes", 10 , lambda r: 10)
+    _hparam("num_domains", 3 , lambda r: 3)
+    _hparam("model", "swag_regnety_16gf", lambda r: "swag_regnety_16gf")
+    _hparam("pretained", False, lambda r: False)
     ## @Kowndinya - End of making changes
     _hparam('resnet_dropout', 0., lambda r: r.choice([0., 0.1, 0.5]))
 

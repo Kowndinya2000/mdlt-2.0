@@ -12,7 +12,7 @@ import torch
 import torchvision
 import torch.utils.data
 from tensorboard_logger import Logger
-
+import torch.nn as nn
 from mdlt import hparams_registry
 from mdlt.dataset import datasets
 from mdlt.learning import algorithms
@@ -44,8 +44,9 @@ def main():
     # two-stage related
     parser.add_argument('--stage1_folder', type=str, default='vanilla')
     parser.add_argument('--stage1_algo', type=str, default='ERM')
-    ## @Kowndinya: Added this argument to run stage2
+    ## @Kowndinya: Making Changes
     parser.add_argument("--stage2", action="store_true", help="Run stage2 (classifier learning)")
+    parser.add_argument("--use_miro", action="store_true", help="Use Miro's code for model backbone and mutual information regularization")    
     # checkpoints
     parser.add_argument('--resume', '-r', type=str, default='')
     parser.add_argument('--pretrained', type=str, default='')
@@ -93,7 +94,10 @@ def main():
     if 'Imbalance' in args.dataset:
         hparams.update({'imb_type_per_env': [misc.IMBALANCE_TYPE[x] for x in args.imb_type],
                         'imb_factor': args.imb_factor})
-
+    ## @Kowndinya: Making Changes
+    if args.use_miro:
+        hparams.update({'use_miro': True})
+    ## @Kowndinya: End of making Changes
     print('HParams:')
     for k, v in sorted(hparams.items()):
         print('\t{}: {}'.format(k, v))
@@ -104,8 +108,8 @@ def main():
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    torch.cuda.empty_cache()
     if args.dataset in vars(datasets):
         train_dataset = vars(datasets)[args.dataset](args.data_dir, 'train', hparams)
         val_dataset = vars(datasets)[args.dataset](args.data_dir, 'val', hparams)
@@ -115,7 +119,13 @@ def main():
 
     num_workers = train_dataset.N_WORKERS
     input_shape = train_dataset.input_shape
-    num_classes = train_dataset.num_classes
+    num_classes = train_dataset.num_classes 
+    ## @Kowndinya: Making Changes
+    if args.use_miro:
+        hparams['num_classes'] = num_classes
+        print(dir(train_dataset))
+        hparams['num_domains'] = 4
+  
     n_steps = args.steps or train_dataset.N_STEPS
     checkpoint_freq = args.checkpoint_freq or train_dataset.CHECKPOINT_FREQ
     many_shot_thr = train_dataset.MANY_SHOT_THRES
@@ -177,6 +187,9 @@ def main():
 
     algorithm_class = algorithms.get_algorithm_class(args.algorithm)
     algorithm = algorithm_class(input_shape, num_classes, len(train_dataset), hparams, env_labels=train_labels)
+    if torch.cuda.device_count() > 1:
+        algorithm = nn.DataParallel(algorithm)
+    # algorithm.to(device)
 
     # load stage1 model if using 2-stage algorithm
     print('args.stage2:', args.stage2)
@@ -252,13 +265,13 @@ def main():
                 with torch.no_grad():
                     for x, y in loader:
                         x, y = x.to(device), y.to(device)
-                        feats = algorithm.return_feats(x)
+                        feats = algorithm.module.return_feats(x)
                         curr_tr_feats[name].extend(feats.data)
                         curr_tr_labels[name].extend(y.data)
             train_features = {'feats': curr_tr_feats, 'labels': curr_tr_labels}
 
         algorithm.train()
-        step_vals = algorithm.update(minibatches_device, train_features)
+        step_vals = algorithm.module.update(minibatches_device, train_features)
         checkpoint_vals['step_time'].append(time.time() - step_start_time)
 
         for key, val in step_vals.items():

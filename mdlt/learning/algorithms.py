@@ -119,7 +119,7 @@ class ReWeight(ERM):
             self.weights_per_env[i] = torch.FloatTensor(per_cls_weights)
 
     def update(self, minibatches, env_feats=None):
-        device = "cuda" if minibatches[0][0].is_cuda else "cpu"
+        device = "cuda:1" if minibatches[0][0].is_cuda else "cpu"
         loss = 0
         for env, (x, y) in enumerate(minibatches):
             loss += F.cross_entropy(self.predict(x), y, weight=self.weights_per_env[env].to(device))
@@ -194,7 +194,7 @@ class LDAM(ERM):
             self.m_list[i] = torch.FloatTensor(m_list)
 
     def update(self, minibatches, env_feats=None):
-        device = "cuda" if minibatches[0][0].is_cuda else "cpu"
+        device = "cuda:1" if minibatches[0][0].is_cuda else "cpu"
         loss = 0
         for env, (x, y) in enumerate(minibatches):
             x = self.predict(x)
@@ -486,7 +486,7 @@ class AbstractDANN(Algorithm):
             betas=(self.hparams['beta1'], 0.9))
 
     def update(self, minibatches, env_feats=None):
-        device = "cuda" if minibatches[0][0].is_cuda else "cpu"
+        device = "cuda:1" if minibatches[0][0].is_cuda else "cpu"
         self.update_count += 1
         all_x = torch.cat([x for x, y in minibatches])
         all_y = torch.cat([y for x, y in minibatches])
@@ -560,7 +560,7 @@ class IRM(ERM):
 
     @staticmethod
     def _irm_penalty(logits, y):
-        device = "cuda" if logits[0][0].is_cuda else "cpu"
+        device = "cuda:1" if logits[0][0].is_cuda else "cpu"
         scale = torch.tensor(1.).to(device).requires_grad_()
         loss_1 = F.cross_entropy(logits[::2] * scale, y[::2])
         loss_2 = F.cross_entropy(logits[1::2] * scale, y[1::2])
@@ -570,7 +570,7 @@ class IRM(ERM):
         return result
 
     def update(self, minibatches, env_feats=None):
-        device = "cuda" if minibatches[0][0].is_cuda else "cpu"
+        device = "cuda:1" if minibatches[0][0].is_cuda else "cpu"
         penalty_weight = (self.hparams['irm_lambda'] if self.update_count
                           >= self.hparams['irm_penalty_anneal_iters'] else
                           1.0)
@@ -645,7 +645,7 @@ class GroupDRO(ERM):
         self.register_buffer("q", torch.Tensor())
 
     def update(self, minibatches, env_feats=None):
-        device = "cuda" if minibatches[0][0].is_cuda else "cpu"
+        device = "cuda:1" if minibatches[0][0].is_cuda else "cpu"
 
         if not len(self.q):
             self.q = torch.ones(len(minibatches)).to(device)
@@ -926,7 +926,7 @@ class SagNet(Algorithm):
 
     @staticmethod
     def randomize(x, what="style", eps=1e-5):
-        device = "cuda" if x.is_cuda else "cpu"
+        device = "cuda:1" if x.is_cuda else "cpu"
         sizes = x.size()
         alpha = torch.rand(sizes[0], 1).to(device)
 

@@ -60,7 +60,7 @@ if __name__ == "__main__":
 
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    device = "cuda:1" if torch.cuda.is_available() else "cpu"
     hparams = default_hparams(args.algorithm, args.dataset)
 
     if args.dataset in vars(datasets):

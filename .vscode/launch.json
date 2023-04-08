@@ -148,6 +148,49 @@
             "cwd": "${workspaceFolder}"
         }, 
         {
+            "name": "vlcs - boda - resnet152",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/resnet152vlcs-boda",
+             "--dataset",
+                "VLCS",
+             "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
+            "name": "vlcs - boda - miro",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/mirovlcs-boda",
+             "--dataset",
+                "VLCS",
+             "--algorithm",
+                "BoDA",
+                "--use_miro"
+            ],
+            "cwd": "${workspaceFolder}"
+        }, 
+        {
             "name": "officehome - erm",
             "type": "python",
             "request": "launch",
@@ -182,6 +225,27 @@
              "${workspaceFolder}/out",
              "--output_folder_name",
              "${workspaceFolder}/out/officehome-boda",
+             "--dataset",
+                "OfficeHome",
+             "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "officehome - boda - resnet152",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/resnet152officehome-boda",
              "--dataset",
                 "OfficeHome",
              "--algorithm",
@@ -230,6 +294,28 @@
                 "BoDA"
             ],
             "cwd": "${workspaceFolder}"
+        }
+        , 
+        {
+            "name": "terraincognita - boda - resnet152",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/resnet152terraincognita-boda",
+             "--dataset",
+                "TerraIncognita",
+             "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
         }, 
         {
             "name": "domainnet - erm",
@@ -269,6 +355,27 @@
              "--dataset",
                 "DomainNet",
              "--algorithm",
+                "BoDA"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "DG VLCS VOC- boda - Resnet152",
+            "type": "python",
+            "request": "launch",
+            "module": "mdlt.train",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+             "--data_dir",
+             "${workspaceFolder}/data",
+             "--output_dir",
+             "${workspaceFolder}/out",
+             "--output_folder_name",
+             "${workspaceFolder}/out/DG_VLCS_BODA_VOC_Resnet152",
+             "--dataset",
+                "OfficeHome",
+                "--algorithm",
                 "BoDA"
             ],
             "cwd": "${workspaceFolder}"

@@ -130,8 +130,33 @@ dmypy.json
 .pyre/
 
 # datasets
-data/ 
+data/domain_net/clipart 
+data/domain_net/infograph
+data/domain_net/painting
+data/domain_net/quickdraw
+data/domain_net/sketch
+data/domain_net/real
 
+data/MNIST 
+data/office_home/Art    
+data/office_home/Clipart
+data/office_home/Product
+data/office_home/Real World
+
+data/PACS/art_painting
+data/PACS/cartoon
+data/PACS/sketch
+data/PACS/photo
+
+data/terra_incognita/location_38
+data/terra_incognita/location_43    
+data/terra_incognita/location_46
+data/terra_incognita/location_100
+
+data/VLCS/Caltech101   
+data/VLCS/LabelMe
+data/VLCS/SUN09
+data/VLCS/VOC2007
 #outputs
 out/
 mdlt/models/pacs_boda_r.pkl

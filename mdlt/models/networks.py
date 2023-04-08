@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import torchvision.models
 import copy
 
-from mdlt.models import wide_resnet, kowndi_resnet
+from mdlt.models import modified_resnet, wide_resnet, modified_miro
 
 
 def remove_batch_norm_from_resnet(model):
@@ -188,7 +188,10 @@ def Featurizer(input_shape, hparams):
     elif input_shape[1:3] == (32, 32):
         return wide_resnet.WideResNet(input_shape, 16, 2, 0.)
     elif input_shape[1:3] == (224, 224):
-        return kowndi_resnet.ModifiedResNet(input_shape, hparams)
+        if hparams['use_miro']:
+            # return modified_miro.ModifiedMIRO(input_shape, hparams['num_classes'], hparams['num_domains'], hparams)
+            pass
+        return modified_resnet.ModifiedResNet(input_shape, hparams)
         # return ResNet(input_shape, hparams) # @Kowndinya - Making Changes
     else:
         raise NotImplementedError
